@@ -46,19 +46,18 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     }
 
     public DobbeltLenketListe(T[] a) {
-
+        //Sjekker at tabellen ikke er tom
         Objects.requireNonNull(a, "Tabellen er tom!");
 
-        for(int i = 0; i < a.length; i++){
-            if(a[i] != null && hode == null){
-                hode = hale = new Node<T>(a[i], null, null);
+        for (T t : a) {
+            //sjekker om t == null og om hode-plassen er "ledig" legger til hvis den er det.
+            if (t != null && hode == null) {
+                hode = hale = new Node<T>(t, null, null);
                 antall++;
-            }
-            else if(a[i] != null && hale != null){
-                hale = hale.neste = new Node<T>(a[i], hale.forrige, null);
+            } else if (t != null && hale != null) {  // Sjekker at t ikke er null og legger til hvis den ikke er det.
+                hale = hale.neste = new Node<T>(t, hale.forrige, null);
                 antall++;
-            }
-            else {
+            } else {        // lager en tom liste hvis alle elementene i listen er null.
                 hode = hale = null;
                 antall = this.antall();
             }
