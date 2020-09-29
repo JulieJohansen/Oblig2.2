@@ -47,7 +47,21 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     }
 
     public DobbeltLenketListe(T[] a) {
-        throw new UnsupportedOperationException();
+        //throw new UnsupportedOperationException();
+        //Har ikke gjort noe med neste og forrige pekere ennå. Er litt usikker på hvor de skal settes
+
+        if(tom()){
+            //Hvis tabellen er tom, kaster det et unntak
+            throw new NullPointerException("Tabellen a er null!");
+        }
+        // looper gjennom hver av disse verdiene i a
+        for(T verdi : a){
+            //sjekker om verdi er null
+            if(verdi != null){
+                a[antall++] = verdi;
+            }
+        }
+
     }
 
     public Liste<T> subliste(int fra, int til){
@@ -56,12 +70,25 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public int antall() {
-        throw new UnsupportedOperationException();
+        //throw new UnsupportedOperationException();
+        //Har opprettet en ny node p
+        Node<T> p = hode;
+        //den går helt til p.neste er lik null, dvs helt til p er lik hale
+        while (p.neste != null){
+            //hver gang blir p lik til neste node
+            p = p.neste;
+            //oker antallet
+            antall++;
+
+        }
+        return antall;
     }
 
     @Override
     public boolean tom() {
-        throw new UnsupportedOperationException();
+        //throw new UnsupportedOperationException();
+        //Hvis antallet() er 0, så er listen tom og det returnerer true.
+        return antall() == 0;
     }
 
     @Override
