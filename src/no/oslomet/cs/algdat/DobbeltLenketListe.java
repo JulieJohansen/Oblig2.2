@@ -127,10 +127,21 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     public void nullstill() {
         throw new UnsupportedOperationException();
     }
-
+    // Her er det noe galt med logikken. Fungerer ikke enda.
     @Override
     public String toString() {
-        throw new UnsupportedOperationException();
+        StringBuilder sb = new StringBuilder();
+        sb.append("[");
+        Node<T> p = hode;
+        while(p.neste != null){
+            sb.append(p.verdi).append(",");
+            p = p.neste;
+
+        }
+        sb.append(p.verdi).append("]");
+        // throw new UnsupportedOperationException();
+
+        return sb.toString();
     }
 
     public String omvendtString() {
