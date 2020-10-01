@@ -170,59 +170,50 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     public void nullstill() {
         throw new UnsupportedOperationException();
     }
-    //Fungerer ikke. Får null pointer
+    //Fungerer ikke. Får null pointer og legger ikke til neste element i listen.
     @Override
     public String toString() {
 
         StringBuilder sb = new StringBuilder();         //oppretter en StringBuilder
         sb.append("[");                                 //Legger til "[" som første element
 
-        Node<T> p = hode;                               // Setter hode som første Node den sjekker,
+        if(!tom()){                                     // Sjekker at tabellen ikke er tom.
+            sb.append(hode.verdi);                      // Legger til første verdi i lista.
 
-        p = p.neste;
-
-        if(antall == 0){                                // Sjekker om tabellen er tom, i så fall setter den på "]" på stringen
-            sb.append("]");
-        }
-
-        else {                                          //Hvis den ikke er tom, går den igjennom alle nodene så lenge de har en
-            while (p != null) {                   // nesteverdi som ikke er lik 0. Så legger de til verdien i strengen etterfulgt av et komma.
+            Node<T> p = hode.neste;
+            while (p != null) {
                 sb.append(", ").append(p.verdi);
-                p = p.neste;                            // Setter p= lik neste node.
-
+                p = p.neste;
             }
-            sb.append("]");             //Vi må ha med den siste verdien, etterfulgt av den siste firkantklammen.
         }
 
-        return sb.toString();                       // returnerer strengen som er satt sammen.
+        sb.append("]");                                 // Legger til "]" på slutten.
+
+        return sb.toString();                           // returnerer strengen som er satt sammen.
 
         // throw new UnsupportedOperationException();
 
 
     }
-    // Denne fungerer ikke, stopper etter første verdi i listen. det er logikken det er noe galt med. Får heller ikke kalt den fra main??
+    // Denne fungerer ikke, stopper etter første verdi i listen. det er logikken det er noe galt med.
     public String omvendtString() {
 
-        StringBuilder omvendtStr = new StringBuilder();
-        omvendtStr.append("[");
+        StringBuilder osb = new StringBuilder();
+        osb.append("[");
 
-        Node<T> q = hale;
+        if (!tom()) {
+            osb.append(hale.verdi);
 
-        omvendtStr.append(q.verdi);
-
-        if(antall == 0){
-            omvendtStr.append("]");
-        }
-        else {
+            Node<T> q = hale.forrige;
             while (q != null) {
-                omvendtStr.append(", ").append(q.verdi);
+                osb.append(", ").append(q.verdi);
                 q = q.forrige;
-
             }
-            omvendtStr.append("]");
         }
 
-        return omvendtStr.toString();
+        osb.append("]");
+
+        return osb.toString();
         //throw new UnsupportedOperationException();
     }
 
