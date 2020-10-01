@@ -1,3 +1,7 @@
+/*Aina Katrine Stustad-Meren, s338849, s338849@oslomet.no
+Julie Kvarme Johansen, s338850, s338850@oslomet.no
+Günel Shirinova, s339490, s339490@oslomet.no */
+
 package no.oslomet.cs.algdat;
 
 
