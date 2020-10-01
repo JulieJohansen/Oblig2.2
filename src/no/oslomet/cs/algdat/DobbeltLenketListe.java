@@ -104,6 +104,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     public boolean leggInn(T verdi) {
 
         Objects.requireNonNull(verdi, "Du kan ikke legge inn en tom verdi");
+
         boolean legginn = false;
 
         if(antall == 0){
@@ -124,6 +125,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public void leggInn(int indeks, T verdi) {
+
         throw new UnsupportedOperationException();
     }
 
@@ -147,7 +149,28 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public T oppdater(int indeks, T nyverdi) {
-        throw new UnsupportedOperationException();
+        /**
+         * Lag også metoden T oppdater(int indeks, T nyverdi) . Den skal erstatte
+         * verdien på plass indeks med nyverdi og returnere det som lå der fra før. Husk at indeks
+         * må sjekkes, at null-verdier ikke skal kunne legges inn og at variabelen endringer skal økes.
+         */
+        indeksKontroll(indeks, false);
+        Objects.requireNonNull(nyverdi, "Du kan ikke legge inn NULL-verdier");
+        Node<T> p = finnNode(indeks);
+
+        if(antall == 0){
+            hode = hale = new Node<T>(nyverdi);
+            endringer++;
+        }
+        else{
+            Node<T> q = p.neste;
+            Node<T> r = new Node<T>(nyverdi);
+            q.forrige = r;
+            r.neste = q;
+            r.forrige = p.forrige;
+        }
+        return p.verdi;
+        //throw new UnsupportedOperationException();
     }
 
     @Override

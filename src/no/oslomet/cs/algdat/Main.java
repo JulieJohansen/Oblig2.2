@@ -13,17 +13,20 @@ public class Main {
         System.out.println("Antall : "+liste.antall()+". Er tabellen tom? "+liste.tom());
 
         Liste<Integer> intliste = new DobbeltLenketListe<>(ints);
-        System.out.println("Antall : "+intliste.antall()+". Er tabellen tom? "+intliste.tom());
+        //System.out.println("Antall : "+intliste.antall()+". Er tabellen tom? "+intliste.tom());
         Liste<Integer> intliste2 = new DobbeltLenketListe<>(ints2);
-        System.out.println("Antall : "+intliste2.antall()+". Er tabellen tom? "+intliste2.tom());
+        //System.out.println("Antall : "+intliste2.antall()+". Er tabellen tom? "+intliste2.tom());
 
-        System.out.println(intliste2.toString());
+        //System.out.println(intliste2.toString());
 
-        intliste2.leggInn(9);
-        intliste2.leggInn(6);
-        System.out.println("Antall : "+intliste2.antall()+". Er tabellen tom? "+intliste2.tom());
-        System.out.println(intliste2.toString());
+        //intliste2.leggInn(9);
+        //intliste2.leggInn(6);
+        //System.out.println("Antall : "+intliste2.antall()+". Er tabellen tom? "+intliste2.tom());
+        //System.out.println(intliste2.toString());
 
+        System.out.println(intliste.toString());
+
+        intliste.oppdater(1, 9);
         System.out.println(intliste.toString());
         //System.out.println(String.valueOf(intliste.omvendtString()));
 
