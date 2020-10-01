@@ -9,13 +9,13 @@ public class Main {
 
         Integer [] ints2 = {};
 
-        Liste<String> liste = new DobbeltLenketListe<>(str);
+        DobbeltLenketListe<String> liste = new DobbeltLenketListe<>(str);
         System.out.println("Antall : "+liste.antall()+". Er tabellen tom? "+liste.tom());
 
-        Liste<Integer> intliste = new DobbeltLenketListe<>(ints);
-        //System.out.println("Antall : "+intliste.antall()+". Er tabellen tom? "+intliste.tom());
-        Liste<Integer> intliste2 = new DobbeltLenketListe<>(ints2);
-        //System.out.println("Antall : "+intliste2.antall()+". Er tabellen tom? "+intliste2.tom());
+        DobbeltLenketListe<Integer> intliste = new DobbeltLenketListe<>(ints);
+        System.out.println("Antall : "+intliste.antall()+". Er tabellen tom? "+intliste.tom());
+        DobbeltLenketListe<Integer> intliste2 = new DobbeltLenketListe<>(ints2);
+        System.out.println("Antall : "+intliste2.antall()+". Er tabellen tom? "+intliste2.tom());
 
         //System.out.println(intliste2.toString());
 

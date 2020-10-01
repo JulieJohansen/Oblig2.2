@@ -93,7 +93,8 @@ public class DobbeltLenketListe<T> implements Liste<T> {
             }
         }
         else {
-            for(int i = indeks; i > 0; i--){
+            p = hale;
+            for(int i = antall-1; i >= indeks; i--){
                 p = p.forrige;
             }
         }
@@ -136,9 +137,10 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public T hent(int indeks) {
+
         indeksKontroll(indeks, false);
 
-        return (T) finnNode(indeks);
+        return finnNode(indeks).verdi;
         //throw new UnsupportedOperationException();
     }
 
