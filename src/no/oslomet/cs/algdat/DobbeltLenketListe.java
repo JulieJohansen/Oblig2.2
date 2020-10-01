@@ -115,7 +115,28 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public void leggInn(int indeks, T verdi) {
-        throw new UnsupportedOperationException();
+        //throw new UnsupportedOperationException();
+        Node<T> p = finnNode(indeks);
+        indeksKontroll(indeks, true);
+        // er usikker om jeg skal bruke to if og else if-setninger
+        if(indeks < 0 || indeks > antall){
+            throw new NullPointerException();
+        }// hvis listen er tom
+        else if(antall == 0){
+            hode = hale = p;
+        } // verdien legges først
+        else if(indeks == 0){
+            hode = hode.forrige = p;
+            p.forrige = null;
+        }// verdien legges bakerst
+         else if(indeks == antall){
+            hale = hale.neste = p;
+            p.neste = null;
+        }else {
+          // mangler else-setningen som legger verdien mellom to andre verdier
+        }
+         antall++;
+         endringer++;
     }
 
     @Override
