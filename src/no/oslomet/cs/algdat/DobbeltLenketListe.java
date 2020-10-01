@@ -170,27 +170,31 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     public void nullstill() {
         throw new UnsupportedOperationException();
     }
-    //Fungerer!
+    //Fungerer ikke. Får null pointer
     @Override
     public String toString() {
 
         StringBuilder sb = new StringBuilder();         //oppretter en StringBuilder
         sb.append("[");                                 //Legger til "[" som første element
+
         Node<T> p = hode;                               // Setter hode som første Node den sjekker,
+
+        p = p.neste;
 
         if(antall == 0){                                // Sjekker om tabellen er tom, i så fall setter den på "]" på stringen
             sb.append("]");
         }
+
         else {                                          //Hvis den ikke er tom, går den igjennom alle nodene så lenge de har en
-            while (p.neste != null) {                   // nesteverdi som ikke er lik 0. Så legger de til verdien i strengen etterfulgt av et komma.
-                sb.append(p.verdi).append(", ");
+            while (p != null) {                   // nesteverdi som ikke er lik 0. Så legger de til verdien i strengen etterfulgt av et komma.
+                sb.append(", ").append(p.verdi);
                 p = p.neste;                            // Setter p= lik neste node.
 
             }
-            sb.append(p.verdi).append("]");             //Vi må ha med den siste verdien, etterfulgt av den siste firkantklammen.
+            sb.append("]");             //Vi må ha med den siste verdien, etterfulgt av den siste firkantklammen.
         }
 
-            return sb.toString();                       // returnerer strengen som er satt sammen.
+        return sb.toString();                       // returnerer strengen som er satt sammen.
 
         // throw new UnsupportedOperationException();
 
@@ -202,17 +206,20 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         StringBuilder omvendtStr = new StringBuilder();
         omvendtStr.append("[");
 
-        Node<T> p = hale;
+        Node<T> q = hale;
+
+        omvendtStr.append(q.verdi);
+
         if(antall == 0){
             omvendtStr.append("]");
         }
         else {
-            while (p.forrige != null) {
-                omvendtStr.append(p.verdi).append(", ");
-                p = p.forrige;
+            while (q != null) {
+                omvendtStr.append(", ").append(q.verdi);
+                q = q.forrige;
 
             }
-            omvendtStr.append(p.verdi).append("]");
+            omvendtStr.append("]");
         }
 
         return omvendtStr.toString();
