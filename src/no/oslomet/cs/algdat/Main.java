@@ -18,5 +18,16 @@ public class Main {
         System.out.println("Antall : "+intliste2.antall()+". Er tabellen tom? "+intliste2.tom());
 
         System.out.println(intliste2.toString());
+
+        intliste2.leggInn(9);
+        intliste2.leggInn(6);
+        System.out.println("Antall : "+intliste2.antall()+". Er tabellen tom? "+intliste2.tom());
+        System.out.println(intliste2.toString());
+
+        System.out.println(intliste.toString());
+        //System.out.println(String.valueOf(intliste.omvendtString()));
+
+        //Integer newint = intliste2.hent(0);
+        //System.out.println(newint);
     }
 }

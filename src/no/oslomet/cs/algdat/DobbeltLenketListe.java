@@ -1,3 +1,7 @@
+/*Aina Katrine Stustad-Meren, s338849, s338849@oslomet.no
+Julie Kvarme Johansen, s338850, s338850@oslomet.no
+Günel Shirinova, s339490, s339490@oslomet.no */
+
 package no.oslomet.cs.algdat;
 
 
@@ -44,13 +48,13 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         hode = hale = null;
         antall = 0;
     }
-
+        // Se på endringer-variabelen.
     public DobbeltLenketListe(T[] a) {
         //Sjekker at tabellen ikke er tom
         Objects.requireNonNull(a, "Tabellen er tom!");
 
         for (T t : a) {
-            //sjekker om t == null og om hode-plassen er "ledig" legger til hvis den er det.
+            //sjekker om t == null og om hode-plassen er "ledig," legger til hvis den er det.
             if (t != null && hode == null) {
                 hode = hale = new Node<T>(t, null, null);
                 antall++;
@@ -61,6 +65,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
                 hode = hale = null;
                 antall = this.antall();
             }
+            endringer = 0;
 
         }
         //throw new UnsupportedOperationException();
@@ -82,10 +87,43 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         //throw new UnsupportedOperationException();
         return antall == 0;
     }
+    // Hjelpemetode som beskrevet i oppgaveteksten, Den skal lete frem en node med gitt indeks, begynner fra hode hvis indeks < antall/2
+    // og fra hale om indeks > antall/2
+    private Node<T> finnNode(int indeks){
+        Node<T> p = hode;
+        if(indeks < antall/2){
+            for (int i = 0; i < indeks; i++){
+                p = p.neste;
+            }
+        }
+        else {
+            for(int i = indeks; i > 0; i--){
+                p = p.forrige;
+            }
+        }
+        return  p;
+    }
 
     @Override
     public boolean leggInn(T verdi) {
-        throw new UnsupportedOperationException();
+
+        Objects.requireNonNull(verdi, "Du kan ikke legge inn en tom verdi");
+        boolean legginn = false;
+
+        if(antall == 0){
+            hode = hale = new Node<T>(verdi);
+            antall++;
+            endringer++;
+            legginn = true;
+        }
+        else{
+            hale = hale.neste = new Node<T> (verdi);
+            antall++;
+            endringer++;
+            legginn = true;
+        }
+        return legginn;
+        //throw new UnsupportedOperationException();
     }
 
     @Override
@@ -100,7 +138,10 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public T hent(int indeks) {
-        throw new UnsupportedOperationException();
+        indeksKontroll(indeks, false);
+
+        return (T) finnNode(indeks);
+        //throw new UnsupportedOperationException();
     }
 
     @Override
@@ -127,25 +168,53 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     public void nullstill() {
         throw new UnsupportedOperationException();
     }
-    // Her er det noe galt med logikken. Fungerer ikke enda.
+    //Fungerer!
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("[");
-        Node<T> p = hode;
-        while(p.neste != null){
-            sb.append(p.verdi).append(",");
-            p = p.neste;
 
+        StringBuilder sb = new StringBuilder();         //oppretter en StringBuilder
+        sb.append("[");                                 //Legger til "[" som første element
+        Node<T> p = hode;                               // Setter hode som første Node den sjekker,
+
+        if(antall == 0){                                // Sjekker om tabellen er tom, i så fall setter den på "]" på stringen
+            sb.append("]");
         }
-        sb.append(p.verdi).append("]");
+        else {                                          //Hvis den ikke er tom, går den igjennom alle nodene så lenge de har en
+            while (p.neste != null) {                   // nesteverdi som ikke er lik 0. Så legger de til verdien i strengen etterfulgt av et komma.
+                sb.append(p.verdi).append(", ");
+                p = p.neste;                            // Setter p= lik neste node.
+
+            }
+            sb.append(p.verdi).append("]");             //Vi må ha med den siste verdien, etterfulgt av den siste firkantklammen.
+        }
+
+            return sb.toString();                       // returnerer strengen som er satt sammen.
+
         // throw new UnsupportedOperationException();
 
-        return sb.toString();
-    }
 
+    }
+    // Denne fungerer ikke, stopper etter første verdi i listen. det er logikken det er noe galt med. Får heller ikke kalt den fra main??
     public String omvendtString() {
-        throw new UnsupportedOperationException();
+
+        StringBuilder omvendtStr = new StringBuilder();
+        omvendtStr.append("[");
+
+        Node<T> p = hale;
+        if(antall == 0){
+            omvendtStr.append("]");
+        }
+        else {
+            while (p.forrige != null) {
+                omvendtStr.append(p.verdi).append(", ");
+                p = p.forrige;
+
+            }
+            omvendtStr.append(p.verdi).append("]");
+        }
+
+        return omvendtStr.toString();
+        //throw new UnsupportedOperationException();
     }
 
     @Override
