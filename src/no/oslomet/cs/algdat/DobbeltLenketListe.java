@@ -44,7 +44,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         hode = hale = null;
         antall = 0;
     }
-
+        // Se på endringer-variabelen.
     public DobbeltLenketListe(T[] a) {
         //Sjekker at tabellen ikke er tom
         Objects.requireNonNull(a, "Tabellen er tom!");
@@ -61,6 +61,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
                 hode = hale = null;
                 antall = this.antall();
             }
+            endringer = 0;
 
         }
         //throw new UnsupportedOperationException();
