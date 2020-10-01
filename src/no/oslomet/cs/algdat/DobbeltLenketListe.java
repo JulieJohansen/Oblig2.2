@@ -91,6 +91,23 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         return antall() == 0;
     }
 
+    private Node<T> finnNode(int index) {
+        Node<T> p = hode;
+        if (index < (antall / 2)) {
+            // den starter fra hode og looper til indeks
+            for (int i = 0; i < index; i++) {
+                p = p.neste;
+            }
+        } else {
+            // p ble satt til hale
+            p = hale;
+            // her må den nye noden starte fra halen og gå til indeks
+            for (int i = antall - 1; i >= index; i--) {
+                p = p.forrige;
+            }
+        }
+        return p;
+    }
     @Override
     public boolean leggInn(T verdi) {
         throw new UnsupportedOperationException();
