@@ -126,10 +126,12 @@ public class DobbeltLenketListe<T> implements Liste<T> {
             legginn = true;
         }
         else{
-            hale = hale.neste = new Node<T> (verdi);
+            Node<T> p = new Node<T>(verdi);
+            hale.neste = p;
+            p.forrige = hale;
+            hale = p;
+            hale.neste = null;
             antall++;
-            endringer++;
-            legginn = true;
         }
         return legginn;
         //throw new UnsupportedOperationException();

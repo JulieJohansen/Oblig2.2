@@ -16,10 +16,19 @@ public class Main {
         System.out.println("Antall : "+intliste.antall()+". Er tabellen tom? "+intliste.tom());
         DobbeltLenketListe<Integer> intliste2 = new DobbeltLenketListe<>(ints2);
         System.out.println("Antall : "+intliste2.antall()+". Er tabellen tom? "+intliste2.tom());
+
+        System.out.println(intliste2.toString());
+
+        intliste2.leggInn(9);
+        intliste2.leggInn(6);
+        //System.out.println("Antall : "+intliste2.antall()+". Er tabellen tom? "+intliste2.tom());
+        //System.out.println(intliste2.toString());
+        System.out.println(liste.toString());
         System.out.println(intliste.toString());
-        System.out.println(intliste.omvendtString());
+        System.out.println(intliste2.omvendtString());
+        System.out.println(liste.omvendtString());
 
-        System.out.println(intliste.hent(1));
-
+        //Integer newint = intliste2.hent(0);
+        //System.out.println(newint);
     }
 }
