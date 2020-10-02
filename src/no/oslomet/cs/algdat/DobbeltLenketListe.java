@@ -115,28 +115,30 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public void leggInn(int indeks, T verdi) {
-        //throw new UnsupportedOperationException();
-        Node<T> p = finnNode(indeks);
-        indeksKontroll(indeks, true);
-        // er usikker om jeg skal bruke to if og else if-setninger
-        if(indeks < 0 || indeks > antall){
-            throw new NullPointerException();
-        }// hvis listen er tom
-        else if(antall == 0){
-            hode = hale = p;
-        } // verdien legges først
-        else if(indeks == 0){
-            hode = hode.forrige = p;
-            p.forrige = null;
-        }// verdien legges bakerst
-         else if(indeks == antall){
-            hale = hale.neste = p;
-            p.neste = null;
-        }else {
-          // mangler else-setningen som legger verdien mellom to andre verdier
+        //Den versjonen ble beskrevet i kompendiet
+        Objects.requireNonNull(verdi, "Ikke tillatt med null-verdier!");
+
+        indeksKontroll(indeks, true);  // Se Liste, true: indeks = antall er lovlig
+
+        if (indeks == 0)                     // ny verdi skal ligge først
+        {
+            hode = new Node<>(verdi, null, hode);    // legges først
+            if (antall == 0)
+                hale = hode;      // hode og hale går til samme node
         }
-         antall++;
-         endringer++;
+        else if (indeks == antall)           // ny verdi skal ligge bakerst
+        {
+            hale = hale.neste = new Node<>(verdi, hale, null);  // legges bakerst
+        }
+        else
+        {
+            Node<T> p = hode;                  // p flyttes indeks - 1 ganger
+            for (int i = 1; i < indeks; i++) p = p.neste;
+
+            p.neste = new Node<>(verdi, p.neste, p);  // verdi settes inn i listen
+        }
+        antall++;
+        endringer++;
     }
 
     @Override
@@ -171,7 +173,18 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public void nullstill() {
-        throw new UnsupportedOperationException();
+        //throw new UnsupportedOperationException();
+        Node<T> p = hode;
+        Node<T> q;
+        while (p != null){
+            q = p.neste;
+            p.verdi = null;
+            p.neste = null;
+            p = q;
+        }
+        hode = hale = null;
+        endringer++;
+        antall = 0;
     }
 
     @Override
