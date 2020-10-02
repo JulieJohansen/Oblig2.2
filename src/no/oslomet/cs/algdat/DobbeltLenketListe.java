@@ -59,11 +59,12 @@ public class DobbeltLenketListe<T> implements Liste<T> {
                 hode = hale = new Node<T>(t, null, null);
                 antall++;
             } else if (t != null && hale != null) {  // Sjekker at t ikke er null og legger til hvis den ikke er det.
-                hale = hale.neste = new Node<T>(t, hale.forrige, null);
+                Node<T> p = new Node<T>(t);
+                hale.neste = p;
+                p.forrige = hale;
+                hale = p;
+                hale.neste = null;
                 antall++;
-            } else {        // lager en tom liste hvis alle elementene i listen er null.
-                hode = hale = null;
-                antall = this.antall();
             }
             endringer = 0;
 
@@ -118,10 +119,12 @@ public class DobbeltLenketListe<T> implements Liste<T> {
             legginn = true;
         }
         else{
-            hale = hale.neste = new Node<T> (verdi);
+            Node<T> p = new Node<T>(verdi);
+            hale.neste = p;
+            p.forrige = hale;
+            hale = p;
+            hale.neste = null;
             antall++;
-            endringer++;
-            legginn = true;
         }
         return legginn;
         //throw new UnsupportedOperationException();
