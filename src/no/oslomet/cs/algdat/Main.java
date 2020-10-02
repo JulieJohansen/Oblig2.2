@@ -1,5 +1,7 @@
 package no.oslomet.cs.algdat;
 
+import org.junit.platform.engine.support.hierarchical.Node;
+
 public class Main {
     public static void main(String[] args) {
 
@@ -17,16 +19,10 @@ public class Main {
         DobbeltLenketListe<Integer> intliste2 = new DobbeltLenketListe<>(ints2);
         System.out.println("Antall : "+intliste2.antall()+". Er tabellen tom? "+intliste2.tom());
 
-        System.out.println(intliste2.toString());
+        System.out.println(liste.hent(1));
 
-        intliste2.leggInn(9);
-        intliste2.leggInn(6);
-        //System.out.println("Antall : "+intliste2.antall()+". Er tabellen tom? "+intliste2.tom());
-        //System.out.println(intliste2.toString());
-        System.out.println(liste.toString());
+        System.out.println(intliste.oppdater(2, 9));
         System.out.println(intliste.toString());
-        System.out.println(intliste2.omvendtString());
-        System.out.println(liste.omvendtString());
 
         //Integer newint = intliste2.hent(0);
         //System.out.println(newint);

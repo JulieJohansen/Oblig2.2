@@ -100,12 +100,10 @@ public class DobbeltLenketListe<T> implements Liste<T> {
                 funnet = funnet.neste;
             }
         }
-        else if(indeks == antall){
+
+        else {
             funnet = hale;
-        }
-        else { // Her er det noe galt.
-            funnet = hale;
-            for(int i = antall; i > indeks; i--){
+            for(int i = antall/2; i >= indeks; i--){
                 funnet = funnet.forrige;
             }
         }
@@ -172,18 +170,14 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         indeksKontroll(indeks, false);
         Objects.requireNonNull(nyverdi, "Du kan ikke legge inn NULL-verdier");
         Node<T> p = finnNode(indeks);
+        Node<T> q = p.neste;
 
-        if(antall == 0){
-            hode = hale = new Node<T>(nyverdi);
-            endringer++;
-        }
-        else{
-            Node<T> q = p.neste;
-            Node<T> r = new Node<T>(nyverdi);
-            q.forrige = r;
-            r.neste = q;
-            r.forrige = p.forrige;
-        }
+        Node<T> r = new Node<T>(nyverdi, null, null);
+
+        q.forrige = r;
+        r.neste = q;
+        r.forrige = p.forrige;
+        endringer++;
         return p.verdi;
         //throw new UnsupportedOperationException();
     }
