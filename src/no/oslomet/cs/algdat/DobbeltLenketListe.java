@@ -52,14 +52,18 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         for (T t : a) {
             //sjekker om t == null og om hode-plassen er "ledig," legger til hvis den er det.
             if (t != null && hode == null) {
+
                 hode = hale = new Node<T>(t, null, null);
                 antall++;
+
             } else if (t != null && hale != null) {  // Sjekker at t ikke er null og legger til hvis den ikke er det.
-                hale = hale.neste = new Node<T>(t, hale.forrige, null);
+                Node<T> p = new Node<T>(t);
+                hale.neste = p;
+                p.forrige = hale;
+                hale = p;
+                hale.neste = null;
                 antall++;
-            } else {        // lager en tom liste hvis alle elementene i listen er null.
-                hode = hale = null;
-                antall = this.antall();
+
             }
             endringer = 0;
 
@@ -85,20 +89,27 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     }
     // Hjelpemetode som beskrevet i oppgaveteksten, Den skal lete frem en node med gitt indeks, begynner fra hode hvis indeks < antall/2
     // og fra hale om indeks > antall/2
-    private Node<T> finnNode(int indeks){
-        Node<T> p = hode;
-        if(indeks < antall/2){
+    public Node<T> finnNode(int indeks){
+        Node<T> funnet = hode;
+        if(indeks == 0){
+            return funnet;
+        }
+        else if(indeks < antall/2){
+
             for (int i = 0; i < indeks; i++){
-                p = p.neste;
+                funnet = funnet.neste;
             }
         }
-        else {
-            p = hale;
-            for(int i = antall-1; i >= indeks; i--){
-                p = p.forrige;
+        else if(indeks == antall){
+            funnet = hale;
+        }
+        else { // Her er det noe galt.
+            funnet = hale;
+            for(int i = antall; i > indeks; i--){
+                funnet = funnet.forrige;
             }
         }
-        return  p;
+        return  funnet;
     }
 
     @Override
