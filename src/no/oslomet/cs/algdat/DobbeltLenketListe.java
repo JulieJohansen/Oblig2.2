@@ -99,7 +99,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         }
         else {
             p = hale;
-            for(int i = antall-1; i >= indeks; i--){
+            for(int i = antall-1; i > indeks; i--){
                 p = p.forrige;
             }
         }
@@ -166,7 +166,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
             return false;
         }
 
-        Node<T> p = hode;
+        Node<T> p = hode;                       // Gjeldende node
 
         // Ser etter verdien.
         while (p != null) {
@@ -216,7 +216,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
         indeksKontroll(indeks, false);  // sjekker indeks.
 
-        Node<T> p = hode;
+        Node<T> p = hode;                       // Gjeldende node
 
         // Bare en node i listen
         if (antall == 1) {
