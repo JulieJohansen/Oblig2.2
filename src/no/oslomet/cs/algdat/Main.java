@@ -9,6 +9,8 @@ public class Main {
 
         Integer [] ints2 = {};
 
+        String[] navn = {"Lars","Anders","Bodil","Kari","Per","Berit"};
+
         DobbeltLenketListe<String> liste = new DobbeltLenketListe<>(str);
         System.out.println("Antall : "+liste.antall()+". Er tabellen tom? "+liste.tom());
 
@@ -16,6 +18,8 @@ public class Main {
         System.out.println("Antall : "+intliste.antall()+". Er tabellen tom? "+intliste.tom());
         DobbeltLenketListe<Integer> intliste2 = new DobbeltLenketListe<>(ints2);
         System.out.println("Antall : "+intliste2.antall()+". Er tabellen tom? "+intliste2.tom());
+
+        Liste<String> liste2 = new DobbeltLenketListe<>(navn);
 
         System.out.println(intliste2.toString());
 
@@ -30,5 +34,11 @@ public class Main {
 
         //Integer newint = intliste2.hent(0);
         //System.out.println(newint);
+
+        liste2.forEach(s -> System.out.print(s + " "));
+        System.out.println();
+        for (String s : liste2) {
+            System.out.print(s + " ");
+        }
     }
 }
