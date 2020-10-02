@@ -170,10 +170,10 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
         // Ser etter verdien.
         while (p != null) {
-            if (p.verdi.equals(verdi)) {
+            if (p.verdi.equals(verdi)) {        // Når veriden er funnet hopper den ut av løkka
                 break;
             }
-            p = p.neste;
+            p = p.neste;                        // Eller så sjekkes neste element osv.
         }
 
         // Verdien finnes ikke i lista
@@ -186,21 +186,37 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         }
         // Første fjernes
         else if (p == hode) {
-            hode = hode.neste;
-            hode.forrige = null;
+            hode = hode.neste;                  // Hode-node blir neste node
+            hode.forrige = null;                // Gammelt hode blir null
         }
         // Siste fjernes
         else if (p == hale) {
-            hale = hale.forrige;
-            hale.neste = null;
+            hale = hale.forrige;                // Hale-node blir forrige node
+            hale.neste = null;                  // Gammel hale blir null
         }
-        throw new UnsupportedOperationException();
+        // Verdi mellom to andre fjernes
+        else {
+            p.forrige.neste = p.neste;
+            p.neste.forrige = p.forrige;
+        }
+
+        // Resisrkuilering
+        p.verdi = null;
+        p.forrige = p.neste = null;
+
+        antall--;                               // Det er en verdi midre i lista
+        endringer++;                            // Det har skjedd en endring i lista
+
+        return true;                            // Fjerningen er vellykket
+
     }
 
     @Override
     public T fjern(int indeks) {
 
         indeksKontroll(indeks, false);  // sjekker indeks.
+
+        Node<T> p = hode;
 
         // Bare en node i listen
         if (antall == 1) {
@@ -213,23 +229,39 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         }
         // Sisite node fjernes
         else if (indeks == antall - 1) {
-            hale = hale.forrige;
-            hale.neste = null;
+            p = hale;
+            hale = hale.forrige;                // noden før halen gjøres til hale
+            hale.neste = null;                  // den gamle halen gjøres til null.
         }
-        // Se på hva som skjer videre
-        throw new UnsupportedOperationException();
+        else {
+            p = finnNode(indeks);               // hjelpemetode fra tidligere oppgave
+            p.forrige.neste = p.neste;
+            p.neste.forrige = p.forrige;
+        }
+
+        // Returneres
+        T verdi = p.verdi;
+        // Resirkulering
+        p.verdi = null;
+        p.forrige = p.neste = null;
+
+        antall--;                               // reduserer antallet
+        endringer++;                            // øker endringer
+
+        return verdi;                           // returnerer fjernet verdi
+
     }
 
     @Override
     public void nullstill() {
         throw new UnsupportedOperationException();
     }
-    //Fungerer ikke. Får null pointer og legger ikke til neste element i listen.
+
     @Override
     public String toString() {
 
         StringBuilder sb = new StringBuilder();         //oppretter en StringBuilder
-        sb.append("[");                                 //Legger til "[" som første element
+        sb.append("[");                                 //Legger til [ som første element
 
         if(!tom()){                                     // Sjekker at tabellen ikke er tom.
             sb.append(hode.verdi);                      // Legger til første verdi i lista.
@@ -241,15 +273,12 @@ public class DobbeltLenketListe<T> implements Liste<T> {
             }
         }
 
-        sb.append("]");                                 // Legger til "]" på slutten.
+        sb.append("]");                                 // Legger til ] på slutten.
 
         return sb.toString();                           // returnerer strengen som er satt sammen.
 
-        // throw new UnsupportedOperationException();
-
-
     }
-    // Denne fungerer ikke, stopper etter første verdi i listen. det er logikken det er noe galt med.
+
     public String omvendtString() {
 
         StringBuilder osb = new StringBuilder();
@@ -268,7 +297,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         osb.append("]");
 
         return osb.toString();
-        //throw new UnsupportedOperationException();
+
     }
 
     @Override
