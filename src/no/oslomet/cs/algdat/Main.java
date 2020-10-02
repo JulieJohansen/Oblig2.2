@@ -25,7 +25,7 @@ public class Main {
         //System.out.println(intliste2.toString());
         System.out.println(liste.toString());
         System.out.println(intliste.toString());
-        System.out.println(intliste.omvendtString());
+        System.out.println(intliste2.omvendtString());
         System.out.println(liste.omvendtString());
 
         //Integer newint = intliste2.hent(0);
