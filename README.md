@@ -14,8 +14,9 @@ Se oblig-tekst for alle krav. Oppgaver som ikke oppfyller følgende vil ikke få
 # Arbeidsfordeling
 
 Oppgaven er levert av følgende studenter:
-* Navn Navnesen, S981737, s981737@oslomet.no
-* ...
+* Aina Katrine Stustad-Meren, s338849, s338849@oslomet.no
+* Julie Kvarme Johansen, s338850, s338850@oslomet.no
+* Günel Shirinova, s339490, s339490@oslomet.no
 
 Vi har brukt git til å dokumentere arbeidet vårt. Vi har 16 commits totalt, og hver logg-melding beskriver det vi har gjort av endringer.
 
