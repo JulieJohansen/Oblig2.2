@@ -132,26 +132,25 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public void leggInn(int indeks, T verdi) {
-        //finner verdier
-         Node<T> p = finnNode(indeks);
-        //brukes indeksKontroll() for å sjekke om det er gyldig antall
-        indeksKontroll(indeks, true);
-        //null-verdier aksepteres ikke
-        Objects.requireNonNull(verdi, "Ikke tillatt med null-verdier");
-        //sjekker om listen er tom
-        if(antall == 0){
-           // hode = hale = p;
-            hode = hale = new Node<>(verdi);
-        //legger verdien først
-        }else if(indeks == 0){
-            hode = p;
-          // p.forrige = null;
-        //legger verdien bakerst
-        }else if(indeks == antall){
-            hale = p;
-            //legger verdien mellom andre verdier (er litt usikker på det)
-        }else {
-            p.neste = new Node<>(verdi, p.neste, p);
+        Objects.requireNonNull(verdi, "Ikke tillatt med null-verdier!");
+        indeksKontroll(indeks, true);  // Se Liste, true: indeks = antall er lovlig
+
+        if (indeks == 0)                     // ny verdi skal ligge først
+        {
+            hode = new Node<>(verdi, null, hode);    // legges først
+             if (antall == 0)
+                 hale = hode;       // hode og hale går til samme node
+        }
+           else if (indeks == antall)           // ny verdi skal ligge bakerst
+        {
+            hale = hale.neste = new Node<>(verdi,hale, null);  // legges bakerst
+        }
+        else
+        {
+            Node<T> p = hode;                  // p flyttes indeks - 1 ganger
+            for (int i = 1; i < indeks; i++) p = p.neste;
+
+            p.neste = new Node<>(verdi, p, p.neste);  // verdi settes inn i listen
         }
         antall++;
         endringer++;
@@ -288,11 +287,11 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public void nullstill() {
-        //throw new UnsupportedOperationException();
+
         Node<T> p = hode;
         Node<T> q;
         while (p != null){
-            q = p.neste;
+           q = p.neste;
             p.verdi = null;
             p.neste = null;
             p = q;
@@ -300,6 +299,18 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         hode = hale = null;
         endringer++;
         antall = 0;
+
+
+        /*Node<T> p = hode, q;
+        while (fjern(0) != null){
+            q = p.neste;
+            p.verdi = null;
+            p.neste = null;
+
+        }
+        hode = hale = null;
+        endringer++;
+        antall= 0;*/
     }
 
     @Override
