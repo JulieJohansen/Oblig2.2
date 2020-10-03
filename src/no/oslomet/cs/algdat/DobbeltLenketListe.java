@@ -71,6 +71,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         //throw new UnsupportedOperationException();
 
     }
+    // hjelpemetode til bl. subliste(int fra, int til), hentet fra kompendiet slik det er foreslått i oppgaveteksten.
     private static void fratilKontroll(int antall, int fra, int til)
     {
         if (fra < 0)                                  // fra er negativ
@@ -86,15 +87,16 @@ public class DobbeltLenketListe<T> implements Liste<T> {
                     ("fra(" + fra + ") > til(" + til + ") - illegalt intervall!");
     }
 
+    // subliste bruker både leggInn(T verdi) og hent(int indeks)
     public Liste<T> subliste(int fra, int til){
 
         fratilKontroll(antall, fra, til);
-        Liste<T> subListe = new DobbeltLenketListe<T>();
-        for(int i = fra; i < til ; i++){
 
+        Liste<T> subListe = new DobbeltLenketListe<T>();
+
+        for(int i = fra; i < til ; i++){
             subListe.leggInn(hent(i));
         }
-        //throw new UnsupportedOperationException();
         return subListe;
     }
 
