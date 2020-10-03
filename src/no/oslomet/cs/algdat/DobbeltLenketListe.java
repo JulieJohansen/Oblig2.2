@@ -133,22 +133,23 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     @Override
     public void leggInn(int indeks, T verdi) {
         //finner verdier
-        Node<T> p = finnNode(indeks);
+         Node<T> p = finnNode(indeks);
         //brukes indeksKontroll() for å sjekke om det er gyldig antall
         indeksKontroll(indeks, true);
         //null-verdier aksepteres ikke
         Objects.requireNonNull(verdi, "Ikke tillatt med null-verdier");
         //sjekker om listen er tom
         if(antall == 0){
-            hode = hale = p;
+           // hode = hale = p;
+            hode = hale = new Node<>(verdi);
         //legger verdien først
         }else if(indeks == 0){
-           hode.forrige = p;
-           p.forrige = null;
+            hode = p;
+          // p.forrige = null;
         //legger verdien bakerst
         }else if(indeks == antall){
-            hale  = hale.neste = p;
-        //legger verdien mellom andre verdier (er litt usikker på det)
+            hale = p;
+            //legger verdien mellom andre verdier (er litt usikker på det)
         }else {
             p.neste = new Node<>(verdi, p.neste, p);
         }
@@ -158,7 +159,8 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public boolean inneholder(T verdi) {
-        throw new UnsupportedOperationException();
+        // returnerer true
+        return indeksTil(verdi) != -1;
     }
 
     @Override
@@ -167,12 +169,23 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         indeksKontroll(indeks, false);
 
         return finnNode(indeks).verdi;
-        //throw new UnsupportedOperationException();
+
     }
 
     @Override
     public int indeksTil(T verdi) {
-        throw new UnsupportedOperationException();
+      //sjekker om verdi er null
+        if (verdi == null) {
+            return -1;}
+        Node<T> p = hode;
+         // looper gjennom hele listen
+        for (int indeks = 0; indeks < antall ; indeks++)
+        {
+            if (p.verdi.equals(verdi)) {
+                return indeks;}
+                p = p.neste;
+        }
+        return -1;
     }
 
     @Override
