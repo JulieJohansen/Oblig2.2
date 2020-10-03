@@ -1,7 +1,3 @@
-/*Aina Katrine Stustad-Meren, s338849, s338849@oslomet.no
-Julie Kvarme Johansen, s338850, s338850@oslomet.no
-Günel Shirinova, s339490, s339490@oslomet.no */
-
 package no.oslomet.cs.algdat;
 
 
@@ -56,8 +52,10 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         for (T t : a) {
             //sjekker om t == null og om hode-plassen er "ledig," legger til hvis den er det.
             if (t != null && hode == null) {
+
                 hode = hale = new Node<T>(t, null, null);
                 antall++;
+
             } else if (t != null && hale != null) {  // Sjekker at t ikke er null og legger til hvis den ikke er det.
                 Node<T> p = new Node<T>(t);
                 hale.neste = p;
@@ -72,9 +70,33 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         //throw new UnsupportedOperationException();
 
     }
+    // hjelpemetode til bl. subliste(int fra, int til), hentet fra kompendiet slik det er foreslått i oppgaveteksten.
+    private static void fratilKontroll(int antall, int fra, int til)
+    {
+        if (fra < 0)                                  // fra er negativ
+            throw new IndexOutOfBoundsException
+                    ("fra(" + fra + ") er negativ!");
 
+        if (til > antall)                          // til er utenfor tabellen
+            throw new IndexOutOfBoundsException
+                    ("til(" + til + ") > antallet (" + antall + ")");
+
+        if (fra > til)                                // fra er større enn til
+            throw new IllegalArgumentException
+                    ("fra(" + fra + ") > til(" + til + ") - illegalt intervall!");
+    }
+
+    // subliste bruker både leggInn(T verdi) og hent(int indeks)
     public Liste<T> subliste(int fra, int til){
-        throw new UnsupportedOperationException();
+
+        fratilKontroll(antall, fra, til);
+
+        Liste<T> subListe = new DobbeltLenketListe<T>();
+
+        for(int i = fra; i < til ; i++){
+            subListe.leggInn(hent(i));
+        }
+        return subListe;
     }
 
     @Override
@@ -90,26 +112,31 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     }
     // Hjelpemetode som beskrevet i oppgaveteksten, Den skal lete frem en node med gitt indeks, begynner fra hode hvis indeks < antall/2
     // og fra hale om indeks > antall/2
-    private Node<T> finnNode(int indeks){
-        Node<T> p = hode;
-        if(indeks < antall/2){
+    public Node<T> finnNode(int indeks){
+        Node<T> funnet = hode;
+        if(indeks == 0){
+            return funnet;
+        }
+        else if(indeks <= antall/2){
+
             for (int i = 0; i < indeks; i++){
-                p = p.neste;
+                funnet = funnet.neste;
             }
         }
         else {
-            p = hale;
+            funnet = hale;
             for(int i = antall-1; i > indeks; i--){
-                p = p.forrige;
+                funnet = funnet.forrige;
             }
         }
-        return  p;
+        return  funnet;
     }
 
     @Override
     public boolean leggInn(T verdi) {
 
         Objects.requireNonNull(verdi, "Du kan ikke legge inn en tom verdi");
+
         boolean legginn = false;
 
         if(antall == 0){
@@ -125,6 +152,8 @@ public class DobbeltLenketListe<T> implements Liste<T> {
             hale = p;
             hale.neste = null;
             antall++;
+            endringer++;
+            legginn = true;
         }
         return legginn;
         //throw new UnsupportedOperationException();
@@ -189,7 +218,20 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public T oppdater(int indeks, T nyverdi) {
-        throw new UnsupportedOperationException();
+        /**
+         * Lag også metoden T oppdater(int indeks, T nyverdi) . Den skal erstatte
+         * verdien på plass indeks med nyverdi og returnere det som lå der fra før. Husk at indeks
+         * må sjekkes, at null-verdier ikke skal kunne legges inn og at variabelen endringer skal økes.
+         */
+        indeksKontroll(indeks, false);
+        Objects.requireNonNull(nyverdi, "Du kan ikke legge inn NULL-verdier");
+
+        Node<T> p = finnNode(indeks);
+        T gammelVerdi = p.verdi;
+        p.verdi = nyverdi;
+
+        return gammelVerdi;
+        //throw new UnsupportedOperationException();
     }
 
     @Override
