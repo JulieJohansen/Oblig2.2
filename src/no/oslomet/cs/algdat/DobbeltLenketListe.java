@@ -308,7 +308,8 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     }
 
     public Iterator<T> iterator(int indeks) {
-        throw new UnsupportedOperationException();
+
+        return new DobbeltLenketListeIterator(indeks);
     }
 
     private class DobbeltLenketListeIterator implements Iterator<T>
@@ -324,7 +325,13 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         }
 
         private DobbeltLenketListeIterator(int indeks){
-            throw new UnsupportedOperationException();
+
+            indeksKontroll(indeks,false);
+            denne = finnNode(indeks);   // Setter "denne" til den noden som tilhorer den oppgitte indeksen
+            // Resten er som i ferdigkodet constructor
+            fjernOK = false;
+            iteratorendringer = endringer;
+
         }
 
         @Override
