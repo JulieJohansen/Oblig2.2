@@ -20,6 +20,8 @@ public class Main {
         System.out.println("Antall : "+intliste2.antall()+". Er tabellen tom? "+intliste2.tom());
 
         Liste<String> liste2 = new DobbeltLenketListe<>(navn);
+        DobbeltLenketListe<String> liste3 =
+                new DobbeltLenketListe<>(new String[] {"Birger","Lars","Anders","Bodil","Kari","Per","Berit"});
 
         System.out.println(intliste2.toString());
 
@@ -40,5 +42,9 @@ public class Main {
         for (String s : liste2) {
             System.out.print(s + " ");
         }
+
+        liste3.fjernHvis(navn1 -> navn1.charAt(0) == 'B'); // fjerner navn som starter på B
+
+        System.out.println(liste3 + " " + liste3.omvendtString());
     }
 }

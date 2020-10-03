@@ -362,6 +362,46 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
         @Override
         public void remove(){
+
+            // Sjekker on det er tillatt å kalle denne metoden
+            if (!fjernOK) {
+                throw new IllegalStateException("Ulovlig tilstand!");
+            }
+
+            // Sjekker om "endringer" og "iteratorendringer" er like
+            if (iteratorendringer != endringer) {
+                throw new ConcurrentModificationException("Endringer har skjedd i listen!");
+            }
+
+            fjernOK = false;    // remove() kan ikke kalles på nytt
+            Node<T> andre = hode;   // Hjelpevariabel som beskrevet i kompendie
+
+            // Hode og hale nulles når det bare er et element
+            if (antall == 1) {
+                hode = hale = null;
+            }
+            // Hale oppdateres når den siste skal fjernes
+            else if (denne == null) {
+
+            }
+            // Hode oppdateres når den første skal fjernes
+            else if (denne.forrige == hode) {
+
+            }
+            // Node inne i listen skal oppdateres: pekere i hver side må oppdateres
+            else {
+
+            }
+
+            andre.verdi = null; // Resirkulerer: nuller verdien i noden
+            andre.neste = null; // Resirkulerer
+
+            // antall reduseres
+            antall--;
+            // endreinger økes
+            endringer++;
+            // iteratorendringer økes
+            iteratorendringer++;
             throw new UnsupportedOperationException();
         }
 
