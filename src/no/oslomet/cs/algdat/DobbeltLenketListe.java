@@ -359,6 +359,27 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     public String toString() {
 
         StringBuilder sb = new StringBuilder();         //oppretter en StringBuilder
+        sb.append("[");                                 //Legger til "[" som første element
+        Node<T> p = hode;                               // Setter hode som første Node den sjekker,
+
+        if(antall == 0){                                // Sjekker om tabellen er tom, i så fall setter den på "]" på stringen
+            sb.append("]");
+        }
+        else {                                          //Hvis den ikke er tom, går den igjennom alle nodene så lenge de har en
+            while (p.neste != null) {                   // nesteverdi som ikke er lik 0. Så legger de til verdien i strengen etterfulgt av et komma.
+                sb.append(p.verdi).append(", ");
+                p = p.neste;                            // Setter p= lik neste node.
+
+            }
+            sb.append(p.verdi).append("]");             //Vi må ha med den siste verdien, etterfulgt av den siste firkantklammen.
+        }
+
+        return sb.toString();
+
+
+
+        /*
+        StringBuilder sb = new StringBuilder();         //oppretter en StringBuilder
         sb.append("[");                                 //Legger til [ som første element
 
         if(!tom()){                                     // Sjekker at tabellen ikke er tom.
@@ -374,7 +395,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         sb.append("]");                                 // Legger til ] på slutten.
 
         return sb.toString();                           // returnerer strengen som er satt sammen.
-
+*/
     }
 
     public String omvendtString() {
