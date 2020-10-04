@@ -137,13 +137,8 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
         Objects.requireNonNull(verdi, "Du kan ikke legge inn en tom verdi");
 
-        boolean legginn = false;
-
         if(antall == 0){
             hode = hale = new Node<T>(verdi);
-            antall++;
-            endringer++;
-            legginn = true;
         }
         else{
             Node<T> p = new Node<T>(verdi);
@@ -151,12 +146,10 @@ public class DobbeltLenketListe<T> implements Liste<T> {
             p.forrige = hale;
             hale = p;
             hale.neste = null;
-            antall++;
-            endringer++;
-            legginn = true;
         }
-        return legginn;
-        //throw new UnsupportedOperationException();
+        antall++;
+        endringer++;
+        return true;
     }
 
     @Override
@@ -229,6 +222,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         Node<T> p = finnNode(indeks);
         T gammelVerdi = p.verdi;
         p.verdi = nyverdi;
+        endringer++;
 
         return gammelVerdi;
         //throw new UnsupportedOperationException();
@@ -358,44 +352,44 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     @Override
     public String toString() {
 
-        StringBuilder sb = new StringBuilder();         //oppretter en StringBuilder
-        sb.append("[");                                 //Legger til "[" som første element
-        Node<T> p = hode;                               // Setter hode som første Node den sjekker,
+            StringBuilder sb = new StringBuilder();         //oppretter en StringBuilder
+            sb.append("[");                                 //Legger til "[" som første element
+            Node<T> p = hode;                               // Setter hode som første Node den sjekker,
 
-        if(antall == 0){                                // Sjekker om tabellen er tom, i så fall setter den på "]" på stringen
-            sb.append("]");
-        }
-        else {                                          //Hvis den ikke er tom, går den igjennom alle nodene så lenge de har en
-            while (p.neste != null) {                   // nesteverdi som ikke er lik 0. Så legger de til verdien i strengen etterfulgt av et komma.
-                sb.append(p.verdi).append(", ");
-                p = p.neste;                            // Setter p= lik neste node.
-
+            if(antall == 0){                                // Sjekker om tabellen er tom, i så fall setter den på "]" på stringen
+                sb.append("]");
             }
-            sb.append(p.verdi).append("]");             //Vi må ha med den siste verdien, etterfulgt av den siste firkantklammen.
-        }
+            else {                                          //Hvis den ikke er tom, går den igjennom alle nodene så lenge de har en
+                while (p.neste != null) {                   // nesteverdi som ikke er lik 0. Så legger de til verdien i strengen etterfulgt av et komma.
+                    sb.append(p.verdi).append(", ");
+                    p = p.neste;                            // Setter p= lik neste node.
 
-        return sb.toString();
-
-
-
-        /*
-        StringBuilder sb = new StringBuilder();         //oppretter en StringBuilder
-        sb.append("[");                                 //Legger til [ som første element
-
-        if(!tom()){                                     // Sjekker at tabellen ikke er tom.
-            sb.append(hode.verdi);                      // Legger til første verdi i lista.
-
-            Node<T> p = hode.neste;
-            while (p != null) {
-                sb.append(", ").append(p.verdi);
-                p = p.neste;
+                }
+                sb.append(p.verdi).append("]");             //Vi må ha med den siste verdien, etterfulgt av den siste firkantklammen.
             }
-        }
 
-        sb.append("]");                                 // Legger til ] på slutten.
+            return sb.toString();
 
-        return sb.toString();                           // returnerer strengen som er satt sammen.
-*/
+
+
+/*
+            StringBuilder sb = new StringBuilder();         //oppretter en StringBuilder
+            sb.append("[");                                 //Legger til [ som første element
+
+            if(!tom()){                                     // Sjekker at tabellen ikke er tom.
+                sb.append(hode.verdi);                      // Legger til første verdi i lista.
+
+                Node<T> p = hode.neste;
+                while (p != null) {
+                    sb.append(", ").append(p.verdi);
+                    p = p.neste;
+                }
+            }
+
+            sb.append("]");                                 // Legger til ] på slutten.
+
+            return sb.toString();                           // returnerer strengen som er satt sammen.
+        */
     }
 
     public String omvendtString() {
