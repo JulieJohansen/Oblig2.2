@@ -430,7 +430,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
             }
 
             fjernOK = false;    // remove() kan ikke kalles på nytt
-            Node<T> andre = hode;   // Hjelpevariabel som beskrevet i kompendie
+            Node<T> denDer = hode;   // Hjelpevariabel som beskrevet i kompendie
 
             // Hode og hale nulles når det bare er et element
             if (antall == 1) {
@@ -438,27 +438,30 @@ public class DobbeltLenketListe<T> implements Liste<T> {
             }
             // Hale oppdateres når den siste skal fjernes
             else if (denne == null) {
-
+                denDer = hale;
+                hale = hale.forrige;
+                hale.neste = null;
             }
             // Hode oppdateres når den første skal fjernes
             else if (denne.forrige == hode) {
-
+                hode = hode.neste;
+                hode.forrige = null;
             }
             // Node inne i listen skal oppdateres: pekere i hver side må oppdateres
             else {
-
+                denDer = denne.forrige;     // "denDer" skal fjernes
+                denDer.forrige.neste = denDer.neste;
+                denDer.neste.forrige = denDer.forrige;
             }
 
-            andre.verdi = null; // Resirkulerer: nuller verdien i noden
-            andre.neste = null; // Resirkulerer
+            denDer.verdi = null; // Resirkulerer: nuller verdien i noden
+            denDer.neste = null; // Resirkulerer: nuller nestereferansen
 
-            // antall reduseres
-            antall--;
-            // endreinger økes
-            endringer++;
-            // iteratorendringer økes
-            iteratorendringer++;
-            throw new UnsupportedOperationException();
+
+            antall--;               // antall reduseres
+            endringer++;            // endreinger økes
+            iteratorendringer++;    // iteratorendringer økes
+
         }
 
     } // class DobbeltLenketListeIterator

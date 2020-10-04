@@ -43,6 +43,7 @@ public class Main {
             System.out.print(s + " ");
         }
 
+        System.out.println();
         liste3.fjernHvis(navn1 -> navn1.charAt(0) == 'B'); // fjerner navn som starter på B
 
         System.out.println(liste3 + " " + liste3.omvendtString());
