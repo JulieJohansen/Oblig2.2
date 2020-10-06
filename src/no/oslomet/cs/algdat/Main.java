@@ -1,7 +1,10 @@
 package no.oslomet.cs.algdat;
 
+import java.util.Comparator;
+
 public class Main {
     public static void main(String[] args) {
+
 
         String [] str = {"hei", null, "paa", "deg",null};
 
@@ -10,6 +13,10 @@ public class Main {
         Integer [] ints2 = {};
 
         String[] navn = {"Lars","Anders","Bodil","Kari","Per","Berit"};
+
+        Liste<String> nyListe = new DobbeltLenketListe<>(navn);
+
+
 
         DobbeltLenketListe<String> liste = new DobbeltLenketListe<>(str);
         System.out.println("Antall : "+liste.antall()+". Er tabellen tom? "+liste.tom());
