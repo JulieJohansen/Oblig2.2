@@ -40,11 +40,11 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     // Denne konstruktøren setter hode- og hale-pekeren på samme node, som i dette tilfellet er null,
     // antallet elementer i listen settes til 0, siden vi ikke har lagt inn noen enda.
     public DobbeltLenketListe() {
-        //throw new UnsupportedOperationException();
+
         hode = hale = null;
         antall = 0;
     }
-        // Se på endringer-variabelen.
+
     public DobbeltLenketListe(T[] a) {
         //Sjekker at tabellen ikke er tom
         Objects.requireNonNull(a, "Tabellen er tom!");
@@ -67,10 +67,10 @@ public class DobbeltLenketListe<T> implements Liste<T> {
             endringer = 0;
 
         }
-        //throw new UnsupportedOperationException();
+
 
     }
-    // hjelpemetode til bl. subliste(int fra, int til), hentet fra kompendiet slik det er foreslått i oppgaveteksten.
+    // hjelpemetode til subliste(int fra, int til), hentet fra kompendiet slik det er foreslått i oppgaveteksten.
     private static void fratilKontroll(int antall, int fra, int til)
     {
         if (fra < 0)                                  // fra er negativ
@@ -101,17 +101,16 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public int antall() {
-        //throw new UnsupportedOperationException();
         return antall;
     }
 
     @Override
     public boolean tom() {
-        //throw new UnsupportedOperationException();
         return antall == 0;
     }
-    // Hjelpemetode som beskrevet i oppgaveteksten, Den skal lete frem en node med gitt indeks, begynner fra hode hvis indeks < antall/2
-    // og fra hale om indeks > antall/2
+
+    // Hjelpemetode som beskrevet i oppgaveteksten, Den skal lete frem en node med gitt indeks,
+    // begynner fra hode hvis indeks < antall/2 og fra hale om indeks > antall/2
     public Node<T> finnNode(int indeks){
         Node<T> funnet = hode;
         if(indeks == 0){
@@ -211,11 +210,6 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public T oppdater(int indeks, T nyverdi) {
-        /**
-         * Lag også metoden T oppdater(int indeks, T nyverdi) . Den skal erstatte
-         * verdien på plass indeks med nyverdi og returnere det som lå der fra før. Husk at indeks
-         * må sjekkes, at null-verdier ikke skal kunne legges inn og at variabelen endringer skal økes.
-         */
         indeksKontroll(indeks, false);
         Objects.requireNonNull(nyverdi, "Du kan ikke legge inn NULL-verdier");
 
@@ -223,9 +217,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         T gammelVerdi = p.verdi;
         p.verdi = nyverdi;
         endringer++;
-
         return gammelVerdi;
-        //throw new UnsupportedOperationException();
     }
 
     @Override
@@ -361,33 +353,11 @@ public class DobbeltLenketListe<T> implements Liste<T> {
                 while (p.neste != null) {                   // nesteverdi som ikke er lik 0. Så legger de til verdien i strengen etterfulgt av et komma.
                     sb.append(p.verdi).append(", ");
                     p = p.neste;                            // Setter p= lik neste node.
-
                 }
                 sb.append(p.verdi).append("]");             //Vi må ha med den siste verdien, etterfulgt av den siste firkantklammen.
             }
 
             return sb.toString();
-
-
-
-/*
-            StringBuilder sb = new StringBuilder();         //oppretter en StringBuilder
-            sb.append("[");                                 //Legger til [ som første element
-
-            if(!tom()){                                     // Sjekker at tabellen ikke er tom.
-                sb.append(hode.verdi);                      // Legger til første verdi i lista.
-
-                Node<T> p = hode.neste;
-                while (p != null) {
-                    sb.append(", ").append(p.verdi);
-                    p = p.neste;
-                }
-            }
-
-            sb.append("]");                                 // Legger til ] på slutten.
-
-            return sb.toString();                           // returnerer strengen som er satt sammen.
-        */
     }
 
     public String omvendtString() {
@@ -524,6 +494,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     // Basert på eksempel i kompendiet 1.4.6 b)
     public static <T> void sorter(Liste<T> liste, Comparator<? super T> c) {
+
         Objects.requireNonNull(liste, "Listen kan ikke være null");
 
         for (int i = 1; i < liste.antall(); i++)
@@ -531,20 +502,12 @@ public class DobbeltLenketListe<T> implements Liste<T> {
             T verdi = liste.hent(i);
             int  j = i - 1;
 
-            // sammenligner og forskyver:
             for (; j >= 0 && c.compare(verdi, liste.hent(j)) < 0 ; j--) {
                 liste.oppdater(j+1, liste.hent(j));
             }
-
             liste.oppdater(j+1, verdi);
         }
-
-
-
-        //throw new UnsupportedOperationException();
     }
-
-
 } // class DobbeltLenketListe
 
 
