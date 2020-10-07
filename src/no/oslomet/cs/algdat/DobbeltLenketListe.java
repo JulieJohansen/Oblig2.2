@@ -486,33 +486,27 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     } // class DobbeltLenketListeIterator
 
-    //Comparator Interface! Denne gjør at vi kan bruke c.naturalOrder() i sorter()
 
-    @FunctionalInterface
-    public interface Komparator<T>{
-
-        int compare(T verdi1, T verdi2);
-
-        static <T extends Comparable<? super T>> Comparator<T> naturalOrder(){
-            return (x, y) -> x.compareTo(y);
-        }
-    }
-
-
+    // Basert på eksempel i kompendiet 1.4.6 b)
     public static <T> void sorter(Liste<T> liste, Comparator<? super T> c) {
-        Objects.requireNonNull(liste, "Listen kan ikke være tom");
-        /*
-        for(int i = 1; i < liste.antall()-1; i++){
+        Objects.requireNonNull(liste, "Listen kan ikke være null");
 
-
+        for (int i = 1; i < liste.antall(); i++)
+        {
             T verdi = liste.hent(i);
-            int j= i-1;
-            for(; j >= 0 && c.naturalOrder()< 0; j--){
+            int  j = i - 1;
 
+            // sammenligner og forskyver:
+            for (; j >= 0 && c.compare(verdi, liste.hent(j)) < 0 ; j--) {
+                liste.oppdater(j+1, liste.hent(j));
             }
 
-         */
-        throw new UnsupportedOperationException();
+            liste.oppdater(j+1, verdi);
+        }
+
+
+
+        //throw new UnsupportedOperationException();
     }
 
 
