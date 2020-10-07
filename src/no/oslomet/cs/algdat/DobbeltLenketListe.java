@@ -337,11 +337,9 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         antall = 0;
 
 
-        /*Node<T> p = hode, q;
-        while (fjern(0) != null){
-            q = p.neste;
-            p.verdi = null;
-            p.neste = null;
+        /*
+        for(int i = 0; i < antall(); i++){
+               fjern(0);
 
         }
         hode = hale = null;
