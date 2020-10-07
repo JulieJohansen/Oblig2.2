@@ -18,7 +18,7 @@ Oppgaven er levert av følgende studenter:
 * Julie Kvarme Johansen, s338850, s338850@oslomet.no
 * Günel Shirinova, s339490, s339490@oslomet.no
 
-Vi har brukt git til å dokumentere arbeidet vårt. Vi har 16 commits totalt, og hver logg-melding beskriver det vi har gjort av endringer.
+Vi har brukt git til å dokumentere arbeidet vårt. 
 
 I oppgaven har vi hatt følgende arbeidsfordeling:
 * Aina har hatt hovedansvar for oppgave 6, 8, og 9. 
