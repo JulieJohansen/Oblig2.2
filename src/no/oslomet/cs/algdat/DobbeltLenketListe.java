@@ -6,9 +6,6 @@ package no.oslomet.cs.algdat;
 
 import java.util.*;
 
-import java.util.function.Predicate;
-
-
 
 public class DobbeltLenketListe<T> implements Liste<T> {
 
@@ -53,11 +50,11 @@ public class DobbeltLenketListe<T> implements Liste<T> {
             //sjekker om t == null og om hode-plassen er "ledig," legger til hvis den er det.
             if (t != null && hode == null) {
 
-                hode = hale = new Node<T>(t, null, null);
+                hode = hale = new Node<>(t, null, null);
                 antall++;
 
-            } else if (t != null && hale != null) {  // Sjekker at t ikke er null og legger til hvis den ikke er det.
-                Node<T> p = new Node<T>(t);
+            } else if (t != null) {  // Sjekker at t ikke er null og legger til hvis den ikke er det.
+                Node<T> p = new Node<>(t);
                 hale.neste = p;
                 p.forrige = hale;
                 hale = p;
@@ -91,7 +88,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
         fratilKontroll(antall, fra, til);
 
-        Liste<T> subListe = new DobbeltLenketListe<T>();
+        Liste<T> subListe = new DobbeltLenketListe<>();
 
         for(int i = fra; i < til ; i++){
             subListe.leggInn(hent(i));
@@ -137,10 +134,10 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         Objects.requireNonNull(verdi, "Du kan ikke legge inn en tom verdi");
 
         if(antall == 0){
-            hode = hale = new Node<T>(verdi);
+            hode = hale = new Node<>(verdi);
         }
         else{
-            Node<T> p = new Node<T>(verdi);
+            Node<T> p = new Node<>(verdi);
             hale.neste = p;
             p.forrige = hale;
             hale = p;
