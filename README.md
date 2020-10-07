@@ -21,10 +21,10 @@ Oppgaven er levert av følgende studenter:
 Vi har brukt git til å dokumentere arbeidet vårt. Vi har 16 commits totalt, og hver logg-melding beskriver det vi har gjort av endringer.
 
 I oppgaven har vi hatt følgende arbeidsfordeling:
-* Per har hatt hovedansvar for oppgave 1, 3, og 5. 
-* Else har hatt hovedansvar for oppgave 2, 4, og 6. 
-* Fatima har hatt hovedansvar for oppgave 7 og 8. 
-* Vi har i fellesskap løst oppgave 10. 
+* Aina har hatt hovedansvar for oppgave 6, 8, og 9. 
+* Günel har hatt hovedansvar for oppgave 4, 5 og 7. 
+* Julie har hatt hovedansvar for oppgave 1, 2 (2a løst i samarbeid med Aina),
+ 3 (3a i samarbeid med Günel og 10.  
 
 # Beskrivelse av oppgaveløsning (maks 5 linjer per oppgave)
 
