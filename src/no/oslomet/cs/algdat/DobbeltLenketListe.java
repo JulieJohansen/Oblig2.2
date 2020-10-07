@@ -159,7 +159,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
         if (indeks == 0)                     // ny verdi skal ligge først
         {
-            hode = new Node<>(verdi, null, hode);    // legges først
+            hode = hode.forrige = new Node<>(verdi, null, hode);    // legges først
              if (antall == 0)
                  hale = hode;       // hode og hale går til samme node
         }
