@@ -40,10 +40,20 @@ I oppgaven har vi hatt følgende arbeidsfordeling:
                 hent(int indeks) - sjekker om det er en gyldig indeks, med metode foreslått i oppgaveteksten. bruker finnNode() for å hente ut verdi fra riktig verdi.
                 oppdater() sjekker gyldig indeks, bruker finnNode til å finne riktig node, setter en ny verdi på noden og returnerer den gamle.
             b) subliste() sjekker for gyldig indekser slik deter forslått i oppgavetekst. Bruker en for-løkke til å gå gjennom listen og metodene leggInn() og hent() for å legge inn riktige verdier i en ny liste som så retrneres.     
+* Oppgave 4: Først sjekker metoden om verdien er null, hvis det er null returnerer -1. Så brukes en vanlig for-løkke, den looper gjennom indeks 
+0 til den siste verdien. Hvis den finnes i listen, returneres verdien, ellers returneres -1, som står i oppgaveteksten.
+* Oppgave 5: Det ble brukt requireNonNull for å ikke tillate nullverdier  og indeksKontroll
+metoden bel brukt for å sjekke om det er lovlig antall elementer i listen. Alle de tilfellene som står i oppgaveteksten
+er sjekket. Hvis listen er tom, hode blir lik hale. Hvis den skal legges først, verdiene blir satt til hode og forrige pekere blir lik null.
+Hvis verdien skal legges sist, blir verdien lik hale og neste pekere blir satt null. Når jeg kjører programmet, får jeg indeks feil. 
 * Oppgave 6: Satte jeg opp sjekkene som en mal for hva som  må sjekkes.
  Brukte tegninger for å få pekere til å peke riktig.
  Brukte litt tid på å finne ut av hvordan jeg skulle få pekeren riktig på hvis det fjernes en verdi mellom to verdier, men litt tegning hjalp.
  Får feilmelding i testkjøring på at metoden er ineffektiv, men har ikke kommet fram til en måte å få den til å bli mer effektiv på.
+* Oppgave 7: Det skal lages to metoder som tømmes listen. En ble kodet ved bruk av while-løkke og den går fra hodet til hale. Den andre
+kodet med for-løkke og fjern-metoden kalles. Fjern metoden fjerner den første verdien helt til listen er tom. I oppgaveteksten står det at 
+vi skal velge den mest effektive metoden. Metoden med while-løkke er mest effektiv. DEn gjør 3n + 6 operasjoner og den andre som kaller
+fjern metoden gjør 4n + 2 operasjoner. 
 * Oppgave 8: a) Satte opp sjekker slik beskrevet i oppg og sørget for å ta vare på _denne.verdi_ og returnere den til slutt.
 b) Returnerte _DobbeltLenketListeIterator()_ for å returnere en instans av iteratorklassen.
 c) Kontrollerte indeks først og brukte _finnNode(indeks)_ for å sette _denne_ til den noden som tilhører den oppgitte indeksen.
