@@ -24,7 +24,16 @@ I oppgaven har vi hatt følgende arbeidsfordeling:
 * Aina har hatt hovedansvar for oppgave 6, 8, og 9. 
 * Günel har hatt hovedansvar for oppgave 4, 5 og 7. 
 * Julie har hatt hovedansvar for oppgave 1, 2 (2a løst i samarbeid med Aina),
- 3 (3a i samarbeid med Günel) og 10.  
+ 3 (3a i samarbeid med Günel) og 10.
+ 
+ # Merknader:
+ * Vi får warnings på metoder hvor vi bruker Objects.requireNonNull() som nullsjekk. Siden denne 
+ nullsjekken ble foreslått brukt i oppgaveteksten, så ser vi bort fra denne. 
+ * Oppgave 5g) Feil i indekssjekken. Her klarer vi ikke helt å se hvor feilen ligger. Resten av oppgaven 
+ kjører fint.
+ * Oppgave 6 zg) Ineffektivkode dukker opp av og til, men ikke alltid. Vi har forsøkt å se på måter 
+ å gjøre den mer effektiv på, men ble stående litt fast.     
+   
 
 # Beskrivelse av oppgaveløsning (maks 5 linjer per oppgave)
 
